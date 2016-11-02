@@ -15,17 +15,14 @@ import java.util.List;
 
 import static com.example.jajimenez.spinners.R.layout.fila;
 
-public class MainActivity extends Activity
-        implements AdapterView.OnItemSelectedListener {
-    ListView lista;
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
+    //ListView lista;
     ArrayList<Equipo> cosas = new ArrayList<Equipo>();
 
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setContentView(R.layout.activity_main);
 
-        public void onCreate(Bundle icicle) {
-            super.onCreate(icicle);
-            setContentView(R.layout.activity_main);
-            Spinner spin=(Spinner)findViewById(R.id.spinner);
-            spin.setOnItemSelectedListener(this);
         cosas.add(new Equipo("Boston Celtics", getResources().getDrawable(R.drawable.celtics)));
         cosas.add(new Equipo("Brooklyn Nets", getResources().getDrawable(R.drawable.nets)));
         cosas.add(new Equipo("Atlanta Hawks", getResources().getDrawable(R.drawable.hawks)));
@@ -56,9 +53,16 @@ public class MainActivity extends Activity
         cosas.add(new Equipo("Utah Jazz", getResources().getDrawable(R.drawable.jazz)));
         cosas.add(new Equipo("Sacramento Kings", getResources().getDrawable(R.drawable.kings)));
         cosas.add(new Equipo("San Antonio Spurs", getResources().getDrawable(R.drawable.spurs)));
-        lista = (ListView) findViewById(android.R.id.list);
-        lista.setAdapter(new miArrayAdapter(this,fila,R.id.nombreEquipo,cosas));
+
+        Spinner spin=(Spinner)findViewById(R.id.spinner);
+        spin.setOnItemSelectedListener(this);
+        //lista = (ListView) findViewById(android.R.id.list);
+        miArrayAdapter adap = new miArrayAdapter(this,fila,R.id.nombreEquipo,cosas);
+        adap.setDropDownViewResource(R.layout.fila);
+        spin.setAdapter(adap);
+        //lista.setAdapter(adap);
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent,
                                View v, int position, long id) {
