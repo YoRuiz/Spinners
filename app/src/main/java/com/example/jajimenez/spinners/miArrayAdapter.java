@@ -22,17 +22,6 @@ public class miArrayAdapter extends ArrayAdapter<Equipo>{
         super(context, fila, texto, equipos);
     }
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Ejemplo funcionando de array adapter propio
-        /*View vista = super.getView(position,convertView,parent);
-        Equipo team = (Equipo) getItem(position);
-        ImageView escudo = (ImageView) vista.findViewById(R.id.escudo);
-        escudo.setImageDrawable(team.getEscudo());
-        TextView nombre = (TextView) vista.findViewById(R.id.nombreEquipo);
-        nombre.setText(team.getNombre());
-        //ImageView escudo = (ImageView) vista.findViewById(R.id.escudo);
-        return vista;*/
-
-
         //Ejemplo de arrayAdapter propio con reciclado
         ViewHolder holder;
         View row = convertView;
@@ -54,23 +43,12 @@ public class miArrayAdapter extends ArrayAdapter<Equipo>{
         return row;
     }
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        //Ejemplo funcionando de array adapter propio
-        /*View vista = super.getView(position,convertView,parent);
-        Equipo team = (Equipo) getItem(position);
-        ImageView escudo = (ImageView) vista.findViewById(R.id.escudo);
-        escudo.setImageDrawable(team.getEscudo());
-        TextView nombre = (TextView) vista.findViewById(R.id.nombreEquipo);
-        nombre.setText(team.getNombre());
-        //ImageView escudo = (ImageView) vista.findViewById(R.id.escudo);
-        return vista;*/
-
-
         //Ejemplo de arrayAdapter propio con reciclado
         ViewHolder holder;
         View row = convertView;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (row==null) {
-            row = inflater.inflate(R.layout.fila, parent, false);
+            row = inflater.inflate(R.layout.fila_alternativa, parent, false);
             ImageView imagen = (ImageView) row.findViewById(R.id.escudo);
             TextView texto = (TextView) row.findViewById(R.id.nombreEquipo);
             holder = new ViewHolder(imagen, texto);
@@ -85,17 +63,14 @@ public class miArrayAdapter extends ArrayAdapter<Equipo>{
         nombre.setText(team.getNombre());
         return row;
     }
-    /*@Override
+    @Override
     public int getItemViewType(int position){
         return position%2;
     }
     public int getViewTypeCount(){
-        return 2;
+        return 1;
     }
-    */
 }
-
-
 class ViewHolder{
     private ImageView imagen;
     private TextView texto;
