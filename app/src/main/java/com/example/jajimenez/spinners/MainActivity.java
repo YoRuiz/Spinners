@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,14 +17,14 @@ import java.util.List;
 
 import static com.example.jajimenez.spinners.R.layout.fila;
 
-public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener{
     //ListView lista;
     ArrayList<Equipo> cosas = new ArrayList<Equipo>();
+    ImageView imagen;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_main);
-
         cosas.add(new Equipo("Boston Celtics", getResources().getDrawable(R.drawable.celtics)));
         cosas.add(new Equipo("Brooklyn Nets", getResources().getDrawable(R.drawable.nets)));
         cosas.add(new Equipo("Atlanta Hawks", getResources().getDrawable(R.drawable.hawks)));
@@ -58,15 +60,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         spin.setOnItemSelectedListener(this);
         //lista = (ListView) findViewById(android.R.id.list);
         miArrayAdapter adap = new miArrayAdapter(this,fila,R.id.nombreEquipo,cosas);
-        adap.setDropDownViewResource(R.layout.fila);
+        //adap.setDropDownViewResource(R.layout.fila);
         spin.setAdapter(adap);
+        imagen = (ImageView) findViewById(R.id.imagenCentral);
         //lista.setAdapter(adap);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent,
                                View v, int position, long id) {
-        //selection.setText(items[position]);
+        imagen.setImageDrawable(cosas.get(position).getEscudo());
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
